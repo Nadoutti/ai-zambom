@@ -98,7 +98,7 @@ def criar_pagamento():
         campos_obrigatorios = [
             "cliente_id",
             "email_cliente",
-            "valor_totaltipo_pagamento",
+            "valor_total",
         ]
         for campo in campos_obrigatorios:
             if campo not in dados:
