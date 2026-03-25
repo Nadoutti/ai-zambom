@@ -97,8 +97,8 @@ def criar_pagamento():
         # Validação dos campos obrigatórios
         campos_obrigatorios = [
             "cliente_id",
-            "email_clientevalor_total",
-            "tipo_pagamento",
+            "email_cliente",
+            "valor_totaltipo_pagamento",
         ]
         for campo in campos_obrigatorios:
             if campo not in dados:
@@ -109,8 +109,8 @@ def criar_pagamento():
         # Cria o objeto de pagamento
         pagamento = {
             "cliente_id": dados["cliente_id"],
-            "codigo_pagamento": dados["codigo_pagamento"],
-            "tipo_pagamento": dados["tipo_pagamento"],
+            "valor_total": dados["valor_total"],
+            "email_cliente": dados["email_cliente"],
             "data_pagamento": dados.get("data_pagamento", datetime.now().isoformat()),
             "criado_em": datetime.now().isoformat(),
         }
