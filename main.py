@@ -97,10 +97,8 @@ def criar_pagamento():
         # Validação dos campos obrigatórios
         campos_obrigatorios = [
             "cliente_id",
-            "codigo_pagamento",
-            "valor_total",
+            "email_clientevalor_total",
             "tipo_pagamento",
-            "numero_parcelas",
         ]
         for campo in campos_obrigatorios:
             if campo not in dados:
@@ -108,34 +106,11 @@ def criar_pagamento():
                     {"success": False, "error": f"Campo obrigatório ausente: {campo}"}
                 ), 400
 
-        # Validação do tipo de pagamento
-        if dados["tipo_pagamento"] not in ["PIX", "Credito"]:
-            return jsonify(
-                {"success": False, "error": "Tipo de pagamento deve ser PIX ou Credito"}
-            ), 400
-
-        # Calcula o valor da parcela
-        valor_total = float(dados["valor_total"])
-        numero_parcelas = int(dados["numero_parcelas"])
-
-        if numero_parcelas <= 0:
-            return jsonify(
-                {
-                    "success": False,
-                    "error": "Número de parcelas deve ser maior que zero",
-                }
-            ), 400
-
-        valor_parcela = round(valor_total / numero_parcelas, 2)
-
         # Cria o objeto de pagamento
         pagamento = {
             "cliente_id": dados["cliente_id"],
             "codigo_pagamento": dados["codigo_pagamento"],
-            "valor_total": valor_total,
             "tipo_pagamento": dados["tipo_pagamento"],
-            "numero_parcelas": numero_parcelas,
-            "valor_parcela": valor_parcela,
             "data_pagamento": dados.get("data_pagamento", datetime.now().isoformat()),
             "criado_em": datetime.now().isoformat(),
         }
